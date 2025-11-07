@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-ui
+  labels:
+    app: basic-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basic-ui
+  template:
+    metadata:
+      labels:
+        app: basic-ui
+    spec:
+      containers:
+      - name: basic-ui
+        image: localhost:5000/basic-ui
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: IfNotPresent
