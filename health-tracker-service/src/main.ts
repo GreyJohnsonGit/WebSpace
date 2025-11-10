@@ -22,23 +22,49 @@ import { SqlQuery } from './SqlQuery';
 
     health.post('/weight', async (request, response) => {
       const { user_id, weight_kg } = request.body;
-      await sql.insertWeight(user_id, weight_kg);
+      await sql.insertWeight({ user_id, weight_kg });
       response.json({ message: 'Weight data saved endpoint v1' });
     });
 
     health.put('/weight', async (request, response) => {
       const { user_id, weight_kg, weight_recorded_at } = request.body;
-      await sql.updateWeight(user_id, weight_kg, weight_recorded_at);
+      await sql.updateWeight({ user_id, weight_kg, weight_recorded_at });
       response.json({ message: 'Weight data updated endpoint v1' });
     });
 
     health.delete('/weight', async (request, response) => {
       const { user_id } = request.body;
-      await sql.deleteWeight(user_id);
+      await sql.deleteWeight({ user_id });
       response.json({ message: 'Weight data deleted endpoint v1' });
     });
 
     v1Router.use('/health', health);
+
+    const user = express.Router();
+
+    user.get('/', async (_request, response) => {
+      response.json(await sql.getAllUsers());
+    });
+
+    user.post('/', async (request, response) => {
+      const { user_name, user_email } = request.body;
+      await sql.insertUser({ user_name, user_email });
+      response.json({ message: 'User data saved endpoint v1' });
+    });
+
+    user.put('/', async (request, response) => {
+      const { user_id, user_name, user_email } = request.body;
+      await sql.updateUser({ user_id, user_name, user_email });
+      response.json({ message: 'User data updated endpoint v1' });
+    });
+
+    user.delete('/', async (request, response) => {
+      const { user_id } = request.body;
+      await sql.deleteUser({ user_id });
+      response.json({ message: 'User data deleted endpoint v1' });
+    });
+
+    v1Router.use('/user', user);
   }
 
   app.use('/api/v1', v1Router);

@@ -32,7 +32,7 @@ const ApiRoute = z.enum([
           .tuple([z.string(), z.string()])
           .parse(args.slice(2));
         sql
-          .insertUser(user_name, user_email)
+          .insertUser({ user_name, user_email })
           .then(console.log);
       },
       put: async () => {
@@ -56,15 +56,15 @@ const ApiRoute = z.enum([
           .tuple([z.string(), z.coerce.number()])
           .parse(args.slice(2));
         sql
-          .insertWeight(user_id, weight_kg)
+          .insertWeight({ user_id, weight_kg })
           .then(console.log);
       },
       put: async () => {
-        const [user_id, weight_kg, recorded_at] = z
+        const [user_id, weight_kg, weight_recorded_at] = z
           .tuple([z.string(), z.coerce.number(), z.coerce.date()])
           .parse(args.slice(2));
         sql
-          .updateWeight(user_id, weight_kg, recorded_at)
+          .updateWeight({ user_id, weight_kg, weight_recorded_at })
           .then(console.log);
       },
       delete: async () => {
@@ -72,13 +72,13 @@ const ApiRoute = z.enum([
           .tuple([z.string()])
           .parse(args.slice(2));
         sql
-          .deleteWeight(user_id)
+          .deleteWeight({ user_id })
           .then(console.log);
       }
     }
   }
 
-  await actionMap[method]();
+  await actionMap![method]();
   await sqlEnd();
   process.exit(0);
 })();

@@ -1,0 +1,1 @@
+ALTER TABLE Weight RENAME COLUMN weight_recorded_at TO recorded_at;
