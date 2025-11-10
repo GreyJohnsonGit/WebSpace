@@ -5,3 +5,8 @@ npm-debug.log*
 dist
 dist-ssr
 *.local
+database/base
+database/global
+database/log
+database/pg*/
+.env

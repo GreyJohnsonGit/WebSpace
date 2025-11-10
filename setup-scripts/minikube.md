@@ -77,3 +77,8 @@ Promote image from local registry to minikube
 ```powershell
 minikube image load localhost:5000/basic-ui
 ```
+
+Get service URL
+```powershell
+minikube service <SERVICE_LABEL> --url
+```

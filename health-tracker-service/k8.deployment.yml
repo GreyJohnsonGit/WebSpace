@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-tracker-service
+  labels:
+    app: health-tracker-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: health-tracker-service
+  template:
+    metadata:
+      labels:
+        app: health-tracker-service
+    spec:
+      containers:
+      - name: health-tracker-service
+        image: localhost:5000/health-tracker-service
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: IfNotPresent

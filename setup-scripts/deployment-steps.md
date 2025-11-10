@@ -3,3 +3,9 @@
 ```podman tag basic-ui:latest localhost:5000/basic-ui:latest```
 ```minikube image load --overwrite localhost:5000/basic-ui```
 ```kubectl apply -f .\k8.deployment.yml```
+
+
+```podman build -f Dockerfile -t health-tracker-service .```
+```podman tag health-tracker-service:latest localhost:5000/health-tracker-service:latest```
+```minikube image load --overwrite localhost:5000/health-tracker-service```
+```kubectl apply -f .\k8.deployment.yml```
