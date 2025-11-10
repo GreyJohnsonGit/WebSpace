@@ -11,9 +11,12 @@
 - [X] Add jest config
 
 #### Features
-- [ ] Implement basic weight tracking endpoints
+- [X] Implement basic weight tracking endpoints
+- [X] Implement user tracking endpoints
 - [ ] Implement authentication protections
 - [ ] Implement Oauth2 integration
+- [ ] Protect against SQL injection
+- [ ] Implement binary for CLI interactions
 
 ### health-tracker-client
 
@@ -30,4 +33,6 @@
 - [ ] Implement Oauth2 login flow
 
 ### Database
-- [ ] Implement database schema
+- [X] Implement database schema
+- [X] Implement migration scripts
+- [ ] Implement stored procedures for common operations

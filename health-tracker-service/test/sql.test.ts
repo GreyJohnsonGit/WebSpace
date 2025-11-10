@@ -1,5 +1,5 @@
 import { describe, it as jestIt, expect, afterAll } from '@jest/globals';
-import { SqlQuery } from '../src/sql';
+import { SqlQuery } from '../src/SqlQuery';
 import dotenv from 'dotenv';
 
 describe(SqlQuery.name, () => {

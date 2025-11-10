@@ -1,12 +1,32 @@
 {
   "folders": [
     {
+      "name": "basic-ui",
+      "path": "./basic-ui"
+    },
+    {
+      "name": "database",
+      "path": "./database"
+    },
+    {
+      "name": "health-tracker-service",
+      "path": "./health-tracker-service"
+    },
+    {
+      "name": "setup-scripts",
+      "path": "./setup-scripts"
+    },
+    {
+      "name": "web-space",
       "path": "."
     }
   ],
   "settings": {
     "eslint.workingDirectories": [
       "health-tracker-service"
+    ],
+    "editor.rulers": [
+      80
     ]
-  }
+  },
 }
