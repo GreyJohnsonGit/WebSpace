@@ -1,6 +1,5 @@
 import postgres from 'postgres';
-import { Weight } from './DatabaseTable/Weight';
-import { UserAccount } from './DatabaseTable/UserAccount';
+import { Weight, UserAccount } from 'health-tracker-common';
 import { isDefined } from './TypeExt/IsDefined';
 
 export function SqlQuery() {
@@ -23,11 +22,18 @@ export function SqlQuery() {
         UPDATE Weight 
         SET weight_kg = ${weight_kg}
         WHERE user_id = ${user_id} 
-        AND weight_recorded_at = ${weight_recorded_at.toISOString()}`;
+        AND 
+          DATE_TRUNC('second', weight_recorded_at) = 
+          DATE_TRUNC('second', ${weight_recorded_at})`
     },
-    deleteWeight(weight: Pick<Weight, 'user_id'>) {
-      const { user_id } = weight;
-      return sql`DELETE FROM Weight WHERE user_id = ${user_id}`;
+    deleteWeight(weight: Pick<Weight, 'user_id' | 'weight_recorded_at'>) {
+      const { user_id, weight_recorded_at } = weight;
+      return sql`
+        DELETE FROM Weight 
+        WHERE user_id = ${user_id} 
+        AND 
+          DATE_TRUNC('second', weight_recorded_at) = 
+          DATE_TRUNC('second', ${weight_recorded_at})`;
     },
 
     getAllUsers() {

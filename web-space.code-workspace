@@ -9,6 +9,10 @@
       "path": "./database"
     },
     {
+      "name": "health-tracker-common",
+      "path": "./health-tracker-common"
+    },
+    {
       "name": "health-tracker-service",
       "path": "./health-tracker-service"
     },

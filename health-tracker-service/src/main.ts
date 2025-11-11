@@ -1,6 +1,8 @@
-import express from 'express';
+import express, { response } from 'express';
 import dotenv from 'dotenv';
 import { SqlQuery } from './SqlQuery';
+import cors from 'cors';
+import { Weight } from 'health-tracker-common';
 
 (async function main() {
   dotenv.config({ quiet: true });
@@ -9,10 +11,21 @@ import { SqlQuery } from './SqlQuery';
   const app = express();
   const port = process.env.PORT || 3000;
 
+  if (process.env.ENVIRONMENT === 'development') {
+    app.use(cors());
+  }
+
+  app.use(express.json());
+
+  app.use((request, response, next) => {
+    console.log(`${request.method} ${request.path}`);
+    next();
+  });
+
   app.get('/', (_request, response) => {
     response.send('Health Tracker Service is running!');
   });
-
+  
   const v1Router = express.Router(); {
     const health = express.Router();
 
@@ -33,8 +46,10 @@ import { SqlQuery } from './SqlQuery';
     });
 
     health.delete('/weight', async (request, response) => {
-      const { user_id } = request.body;
-      await sql.deleteWeight({ user_id });
+      const { user_id, weight_recorded_at } = Weight
+        .pick({ user_id: true, weight_recorded_at: true })
+        .parse(request.body);
+      await sql.deleteWeight({ user_id, weight_recorded_at });
       response.json({ message: 'Weight data deleted endpoint v1' });
     });
 

@@ -1,15 +1,12 @@
 {
-  "name": "health-tracker-service",
+  "name": "health-tracker-common",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "src/main.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "tsx src/main.ts",
-    "dev": "tsx watch src/main.ts --watch-path=src",
-    "bin": "tsx src/bin.ts",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier \"src/**/*.ts\" --check",
@@ -25,12 +22,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
     "eslint-config-prettier": "^10.1.8",
-    "express": "^5.1.0",
-    "health-tracker-common": "file:../health-tracker-common",
-    "postgres": "^3.4.7",
-    "tsx": "^4.20.6",
     "zod": "^4.1.12"
   },
   "devDependencies": {
@@ -41,8 +33,6 @@
     "@eslint/js": "^9.39.1",
     "@eslint/json": "^0.14.0",
     "@eslint/markdown": "^7.5.1",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.5",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.10.0",
     "babel-jest": "^30.2.0",
